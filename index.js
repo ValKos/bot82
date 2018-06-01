@@ -1,4 +1,6 @@
-const url = "https://api.ethermine.org/miner/0x79cdb8174E097dB3a391d29Aefc988581456cF00/currentStats"
+//const url = "https://api.ethermine.org/miner/0x79cdb8174E097dB3a391d29Aefc988581456cF00/currentStats"
+var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+
 const Promise = require('bluebird');
 Promise.config({
   cancellation: true
@@ -16,12 +18,13 @@ const bot = new TelegramBot(token, {polling: true});
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   fetch(url)
-  .then(function(response){
+.then(function(response){
   console.log(response);
   return response.json()
 })
 .then(function(data){
-  bot.sendMessage(chatId, data.activeWorkers);
+  console.log(data.bpi.EUR.rate);
+  bot.sendMessage(chatId, 'fdsf');
 });
 
   // send a message to the chat acknowledging receipt of their message
