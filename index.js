@@ -3,6 +3,8 @@ Promise.config({
   cancellation: true
 });
 
+let resp = {};
+
 const TelegramBot = require('node-telegram-bot-api');
 const token = '600854833:AAEgjiOAwg8HAd9OJt-QUKB1OwEVacZiU-g';
 
@@ -12,20 +14,11 @@ const bot = new TelegramBot(token, {polling: true});
 // messages.
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
+  fetch('https://api.ethermine.org/miner/0x79cdb8174E097dB3a391d29Aefc988581456cF00/currentStats')
+    .then(function(response) {
+      resp=response;
+    }
 
   // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
+  bot.sendMessage(chatId, resp);
 });
-
-
-// const Telegraf = require('telegraf')
-//
-// const bot = new Telegraf(process.env."600854833:AAEgjiOAwg8HAd9OJt-QUKB1OwEVacZiU-g")
-//
-// bot.start((ctx) => ctx.reply('Welcome'))
-// bot.help((ctx) => ctx.reply('Send me a sticker'))
-// bot.on('sticker', (ctx) => ctx.reply('👍'))
-// bot.hears('hi', (ctx) => ctx.reply('Hey there'))
-// bot.hears(/buy/i, (ctx) => ctx.reply('Buy-buy'))
-//
-// bot.startPolling()
