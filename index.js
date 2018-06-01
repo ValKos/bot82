@@ -20,9 +20,31 @@
 //   // send a message to the chat acknowledging receipt of their message
 //   bot.sendMessage(chatId, 'Received your message');
 // });
-
 const TeleBot = require('telebot');
 const bot = new TeleBot('600854833:AAEgjiOAwg8HAd9OJt-QUKB1OwEVacZiU-g');
 
-bot.on('text', (msg) => msg.reply.text(msg.text));
+const axios = require('axios');
+var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+
+bot.on('text', (msg) => {
+  axios.get(url)
+  .then(function (res) {
+    msg.reply.text(res)
+  })
+  .catch(function () {
+    msg.reply.text('Error')
+  })
+});
+
+
+
+
+
+
+
+
+
+
+
+
 bot.start();
