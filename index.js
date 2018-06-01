@@ -1,3 +1,4 @@
+const url = "https://api.ethermine.org/miner/0x79cdb8174E097dB3a391d29Aefc988581456cF00/currentStats"
 const Promise = require('bluebird');
 Promise.config({
   cancellation: true
@@ -14,11 +15,15 @@ const bot = new TelegramBot(token, {polling: true});
 // messages.
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
-  fetch('https://api.ethermine.org/miner/0x79cdb8174E097dB3a391d29Aefc988581456cF00/currentStats')
-    .then(function(response) {
-      resp=response;
-    }
+  fetch(url)
+  .then(function(response){
+  console.log(response);
+  return response.json()
+})
+.then(function(data){
+  bot.sendMessage(chatId, data.activeWorkers);
+});
 
   // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, resp);
+
 });
