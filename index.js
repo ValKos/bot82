@@ -24,9 +24,9 @@ bot.on('message', (msg) => {
 })
 .then(function(data){
   console.log(data.bpi.EUR.rate);
-  bot.sendMessage(chatId, 'fdsf');
+
 });
 
   // send a message to the chat acknowledging receipt of their message
-
+bot.sendMessage(chatId, 'fdsf');
 });
