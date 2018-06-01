@@ -1,25 +1,9 @@
 // //const url = "https://api.ethermine.org/miner/0x79cdb8174E097dB3a391d29Aefc988581456cF00/currentStats"
-// //var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
-//
-// const Promise = require('bluebird');
-// Promise.config({
-//   cancellation: true
-// });
-//
-// let resp = {};
-//
-// const TelegramBot = require('node-telegram-bot-api');
-// const token = '600854833:AAEgjiOAwg8HAd9OJt-QUKB1OwEVacZiU-g';
-//
-// const bot = new TelegramBot(token, {polling: true});
-//
-//
-// bot.on('message', (msg) => {
-//   const chatId = msg.chat.id;
-//
-//   // send a message to the chat acknowledging receipt of their message
-//   bot.sendMessage(chatId, 'Received your message');
-// });
+// const express = require ('express');
+// const port = process.env.PORT || 3000;
+// var app = express();
+
+
 const TeleBot = require('telebot');
 const bot = new TeleBot('600854833:AAEgjiOAwg8HAd9OJt-QUKB1OwEVacZiU-g');
 
@@ -29,7 +13,7 @@ var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
 bot.on('text', (msg) => {
   axios.get(url)
   .then(function (data) {
-    msg.reply.text(data.bpi.EUR.rate)
+    msg.reply.text(data.data.bpi.USD.rate)
   })
   .catch(function () {
     msg.reply.text('rror')
@@ -37,14 +21,26 @@ bot.on('text', (msg) => {
 });
 
 
-
-
-
-
-
-
-
+// axios.get(url)
+// .then(function (data) {
+//   console.log(data.data.bpi.USD.rate)
+// })
+// .catch(handleErrors)
+//
+// function handleErrors(err) {
+//     if (err.response) {
+//       console.log("Problem With Response ", err.response.status);
+//     } else if (err.request) {
+//       console.log("Problem With Request!");
+//     } else {
+//       console.log('Error', err.message);
+//     }
+//   }
 
 
 
 bot.start();
+
+// app.listen(port, ()=> {
+//   console.log(`Server is up on port ${port}`);
+// });
