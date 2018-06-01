@@ -28,8 +28,8 @@ var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
 bot.on('text', (msg) => {
   axios.get(url)
-  .then(function (res) {
-    msg.reply.text(res)
+  .then(function (data) {
+    msg.reply.text(data.bpi.EUR.rate)
   })
   .catch(function () {
     msg.reply.text('Error')
