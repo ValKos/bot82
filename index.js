@@ -32,7 +32,7 @@ bot.on('text', (msg) => {
     msg.reply.text(data.bpi.EUR.rate)
   })
   .catch(function () {
-    msg.reply.text('Error')
+    msg.reply.text('rror')
   })
 });
 
