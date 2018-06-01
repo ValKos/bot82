@@ -14,12 +14,13 @@ bot.on('text', (msg) => {
   axios.get(url)
   .then(function (d) {
     // msg.reply.text(data.data.bpi.USD.rate)
-    msg.reply.text(`W:${d.data.data.activeWorkers},currHashr:${d.data.data.currentHashrate/1000000}`)
+    msg.reply.text(`Workers:${d.data.data.activeWorkers},currHashr:${Math.floor(d.data.data.currentHashrate/1000000)}`)
   })
   .catch(function () {
     msg.reply.text('Error')
   })
 });
+bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 
 
 // axios.get(url)
